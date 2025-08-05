@@ -6,7 +6,7 @@
 /*   By: nolecler <nolecler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 08:44:35 by nolecler          #+#    #+#             */
-/*   Updated: 2025/08/04 14:02:45 by nolecler         ###   ########.fr       */
+/*   Updated: 2025/08/05 10:35:28 by nolecler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,7 @@ Fixed::~Fixed()
 
 float Fixed::toFloat(void) const // de 42 a 42.42
 {
-    float x = (float)_nbr / (float)(1 << _fractBits);
-    return (x);
+    return ((float)_nbr / (1 << _fractBits));
 }
 
 int Fixed::toInt(void) const
@@ -135,7 +134,7 @@ Fixed Fixed::operator/(const Fixed& other) const
 {
     Fixed result;
 
-    result._nbr = this->_nbr / other._nbr;
+    result._nbr = (this->_nbr << _fractBits) / other._nbr;
     return (result);
 }
 
@@ -143,7 +142,7 @@ Fixed Fixed::operator*(const Fixed& other) const
 {
     Fixed result;
 
-    result._nbr = this->_nbr * other._nbr;
+    result._nbr = (this->_nbr * other._nbr) >> _fractBits;
     return (result);
 }
 
