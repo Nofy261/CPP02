@@ -6,7 +6,7 @@
 /*   By: nolecler <nolecler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 08:44:51 by nolecler          #+#    #+#             */
-/*   Updated: 2025/08/05 11:48:44 by nolecler         ###   ########.fr       */
+/*   Updated: 2025/08/06 12:51:39 by nolecler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,14 @@ int main(void)
     std::cout << a << std::endl;
     std::cout << a++ << std::endl;
     std::cout << a << std::endl;
-    
-    std::cout << std::endl;
-    
-    std::cout << b << std::endl; //10.1016
-    std::cout << Fixed::max(a, b) << std::endl; //10.1016
-    
-  
+    std::cout << b << std::endl;
+    std::cout << Fixed::max(a, b) << std::endl;
 
-    
-    
-    return 0;
+
+    Fixed c(10);
+    Fixed d(0);
+
+    std::cout << c / d << std::endl;
+
+    return (0);
 }

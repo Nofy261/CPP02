@@ -6,7 +6,7 @@
 /*   By: nolecler <nolecler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 08:44:47 by nolecler          #+#    #+#             */
-/*   Updated: 2025/08/05 09:41:01 by nolecler         ###   ########.fr       */
+/*   Updated: 2025/08/05 13:23:49 by nolecler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ class Fixed {
 
     public :
 
-        Fixed(); // constructeur par defaut (fixed a;)
-        Fixed(const Fixed& other); // constructeur de recopie (fixed b(a);  je crrer b en copiant a)
-        Fixed &operator=(const Fixed& ex); // operateur d'affectation (b = a)
+        Fixed();
+        Fixed(const Fixed& other);
+        Fixed &operator=(const Fixed& ex);
         ~Fixed();
 
         Fixed(const int i); 
@@ -45,9 +45,8 @@ class Fixed {
         Fixed operator++(int);
         Fixed operator--(int);
 
-        // et retourne une référence vers le plus petit. Donc modifiable
         static Fixed& min(Fixed& a, Fixed& b);
-        static const Fixed& min(const Fixed& a, const Fixed& b); // static : pas besoin d un objet this
+        static const Fixed& min(const Fixed& a, const Fixed& b);
         static Fixed& max(Fixed& a, Fixed& b); 
         static const Fixed& max(const Fixed& a, const Fixed& b);
 
@@ -59,7 +58,7 @@ class Fixed {
 
      private :
         int _nbr;
-        static const int _fractBits = 8; // toute valeur reelle est multiplier par 2^8 donc 256 puis arrondi au plus proche
+        static const int _fractBits = 8;
 };
 
 std::ostream &operator<<(std::ostream &out, const Fixed &obj);

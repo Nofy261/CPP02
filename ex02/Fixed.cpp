@@ -6,10 +6,9 @@
 /*   By: nolecler <nolecler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 08:44:35 by nolecler          #+#    #+#             */
-/*   Updated: 2025/08/05 10:35:28 by nolecler         ###   ########.fr       */
+/*   Updated: 2025/08/06 12:56:08 by nolecler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "Fixed.hpp"
 #include <iostream>
@@ -18,12 +17,10 @@
 
 Fixed::Fixed() : _nbr(0)
 {
-    //std::cout << "Default constructor called" << std::endl;
 }
 
 Fixed::Fixed(const Fixed& other)
 {
-    //std::cout << "Copy constructor called" << std::endl;
     *this = other;
 }
 
@@ -32,8 +29,6 @@ Fixed::Fixed(const int i)
     this->_nbr = i << _fractBits;
 }
 
-//constructeur qui permet de convertir un float en nbr a virgule fixe
-//va arroundir avec roundf et va stocker le chiffre arrondi dans _nbr
 Fixed::Fixed(const float f)
 {
     this->_nbr = roundf(f * (1 << _fractBits));
@@ -58,10 +53,9 @@ Fixed& Fixed::operator=(const Fixed& ex)
 
 Fixed::~Fixed()
 {
-    //std::cout << "Destructor called" << std::endl;
 }
 
-float Fixed::toFloat(void) const // de 42 a 42.42
+float Fixed::toFloat(void) const
 {
     return ((float)_nbr / (1 << _fractBits));
 }
@@ -77,10 +71,6 @@ std::ostream& operator<<(std::ostream &out, const Fixed &obj)
     return (out);
 }
 
-
-//sert a comparer la valeur _nbr de deux objets
-// l objet courant this et l objet other qui est donnee en parametre
-// si _nbr de this est plus grand que le _nbr de l'objet donnee en param on return true
 bool Fixed::operator>(const Fixed& other) const
 {
     return (this->_nbr > other._nbr);
@@ -111,9 +101,6 @@ bool Fixed::operator!=(const Fixed& other) const
     return (this->_nbr != other._nbr);
 }
 
-
-// on additionne la valeur _nbr de l objet courant this et le _nbr de l'objet donnee en param
-// on stocke la somme dans un nouveau objet et on la retourne
 Fixed Fixed::operator+(const Fixed& other) const
 {
     Fixed result;
@@ -134,6 +121,8 @@ Fixed Fixed::operator/(const Fixed& other) const
 {
     Fixed result;
 
+    if (other._nbr == 0) // protection pour la division par zero
+       return (this->_nbr >> _fractBits); // affiche la vrai valeur
     result._nbr = (this->_nbr << _fractBits) / other._nbr;
     return (result);
 }
@@ -146,38 +135,33 @@ Fixed Fixed::operator*(const Fixed& other) const
     return (result);
 }
 
-Fixed& Fixed::operator++() //++a;
+Fixed& Fixed::operator++()
 {
-    this->_nbr += 1; // on incremente puis on retourne l'objet avec sa valeur qui a ete incrementee
+    this->_nbr += 1;
     return (*this);
 }
 
-Fixed& Fixed::operator--() //--a;
+Fixed& Fixed::operator--()
 {
     this->_nbr -= 1;
     return (*this);
 }
 
-// on fait une copie de l'objet courant
-// on incremente la valeur de l objet courant
-// on retourne la copie de l'objet cad l'objet courant avec la valeur avant l'incrementation
-Fixed Fixed::operator++(int) //a++;
+Fixed Fixed::operator++(int)
 {
-   Fixed copyObj(*this); // appel au constructeur de copie
+   Fixed copyObj(*this);
    
    this->_nbr += 1;
    return (copyObj);
 }
 
-
-Fixed Fixed::operator--(int) //a--;
+Fixed Fixed::operator--(int)
 {
     Fixed copyObj(*this);
     
     this->_nbr -= 1;
     return (copyObj);
 }
-
 
 Fixed& Fixed::min(Fixed& a, Fixed& b)
 {
