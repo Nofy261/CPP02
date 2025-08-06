@@ -6,7 +6,7 @@
 /*   By: nolecler <nolecler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 12:08:56 by nolecler          #+#    #+#             */
-/*   Updated: 2025/07/30 14:10:53 by nolecler         ###   ########.fr       */
+/*   Updated: 2025/08/06 11:02:24 by nolecler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,13 @@
 
 class Fixed {
     public :
-        Fixed(); // constructeur par defaut
-        Fixed(const Fixed& other); // constructeur de recopie
-        Fixed &operator=(const Fixed& ex); // operateur d'affectation
-        int getRawBits( void ) const;
-        void setRawBits(int const raw);
+        Fixed();
+        Fixed(const Fixed& other);
+        Fixed &operator=(const Fixed& ex);
         ~Fixed();
+        
+        int getRawBits(void) const;
+        void setRawBits(int const raw);
     
     private :
         int _nbr;
